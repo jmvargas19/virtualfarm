@@ -1,14 +1,46 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Finca Virtual
     </ion-title>
+    <h5>{{ userName }}</h5>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-searchbar [(ngModel)]="productId" [showCancelButton]="true"
+  (ionInput)="getItems($event)" (ionCancel)="onCancel($event)"></ion-searchbar>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="circles" refreshingText="..actualizando"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list inset  *ngFor="let item of transactions">
+    <ion-card>
+      <img src="../../assets/imgs/fondo1.jpeg"/>
+      <ion-card-content>
+        <ion-card-title>
+          <ion-item >
+            Producto: {{ item.productId.name }}
+
+            <ion-icon name="cart" item-right (click)="transDescription(item._id)"></ion-icon>
+          </ion-item>
+        </ion-card-title>
+        <h2>
+          {{ item.typeTransactionId.name }}
+        </h2>
+        <p>
+          Costo: {{ item.price }} Medida: {{ item.measurementId.name }}
+        </p>
+        <p>
+          {{ item.description }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
+

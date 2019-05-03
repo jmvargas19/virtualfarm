@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>typeProduct</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="authForm" (ngSubmit)="saveTypeProducts(authForm.value)">
+    <ion-list>
+      <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+        <ion-label stacked> Name: </ion-label>
+        <ion-input formControlName="name" type="text" placeholder="name" [(ngModel)]="name" name="name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.name.hasError('required') && authForm.controls.name.touched">
+        <p>El nombre es requerido</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.name.hasError('pattern') && authForm.controls.name.touched">
+        <p>No se permiten caracteres especiales</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.productId.valid && authForm.controls.productId.touched}">
+        <ion-label>Product </ion-label>
+        <ion-select formControlName="productId" [(ngModel)]="productId" name="productId">
+          <ion-option *ngFor="let item of products" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.productId.hasError('required') && authForm.controls.productId.touched">
+        <p>El producto es requerido</p>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!authForm.valid"> Guardar </button>
+    </div>
+  </form>
+</ion-content>

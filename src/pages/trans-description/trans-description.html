@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Finca Virtual
+    </ion-title>
+    <h5 item-right>{{ userName }}</h5>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+          <p>Tipo de Transacción: {{ typeTransactionId }}</p>
+          <p>Nombre del Usuario: {{ userId + " " + userIda + " " + userIdb + " " + userIdc }}</p>
+          <p>Categoria: {{ categoryId }}</p>
+          <p>Producto: {{ productId }}</p>
+          <p>Tipo de Producto: {{ typeProductId }}</p>
+          <p>Medida: {{ measurementId }}</p>
+          <p>Estado: {{ stateId }}</p>
+          <p>Fecha de Publicación: {{ publicationDate }}</p>
+          <p>Fecha de Expiración: {{ expirationDate }}</p>
+          <p>Descripción: {{ description }}</p>
+          <p>Precio: {{ price }}</p>
+</ion-content>

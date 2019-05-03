@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Publicar</ion-title>
+    <h5 item-right>{{ userName }}</h5>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="authForm" (ngSubmit)="saveTransactions(authForm.value)">
+    <ion-list>
+      <ion-item [ngClass]="{'error-border':!authForm.controls.userId.valid && authForm.controls.userId.touched}">
+        <ion-label> Usuario </ion-label>
+        <ion-select formControlName="userId" [(ngModel)]="userId" name="userId">
+          <ion-option *ngFor="let item of users" [value]="item._id">{{item.userName}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.userId.hasError('required') && authForm.controls.userId.touched">
+        <p>El nombre del usuario es requerido</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.typeTransactionId.valid && authForm.controls.typeTransactionId.touched}">
+        <ion-label> Tipo de Publicación </ion-label>
+        <ion-select formControlName="typeTransactionId" [(ngModel)]="typeTransactionId" name="typeTransactionId">
+          <ion-option *ngFor="let item of typeTransactions" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.typeTransactionId.hasError('required') && authForm.controls.typeTransactionId.touched">
+        <p>El tipo de transacción es requerido</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.categoryId.valid && authForm.controls.categoryId.touched}">
+        <ion-label> Categoria </ion-label>
+        <ion-select formControlName="categoryId" [(ngModel)]="categoryId" name="categoryId">
+          <ion-option *ngFor="let item of categorys" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.categoryId.hasError('required') && authForm.controls.categoryId.touched">
+        <p>La categoria es requerida</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.productId.valid && authForm.controls.productId.touched}">
+        <ion-label> Producto </ion-label>
+        <ion-select formControlName="productId" [(ngModel)]="productId" name="productId">
+          <ion-option *ngFor="let item of products" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.productId.hasError('required') && authForm.controls.productId.touched">
+        <p>El producto es requerido</p>
+      </ion-item>
+      <ion-item>
+        <p>Si no encuentra su producto en la lista, puede crearlo dando clic en este botón</p>
+        <ion-icon name="add" item-right (click)="newProduct()"></ion-icon>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.typeProductId.valid && authForm.controls.typeProductId.touched}">
+        <ion-label> Tipo de Producto </ion-label>
+        <ion-select formControlName="typeProductId" [(ngModel)]="typeProductId" name="typeProductId">
+          <ion-option *ngFor="let item of typeProducts" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.typeProductId.hasError('required') && authForm.controls.typeProductId.touched">
+        <p>El tipo de producto es requerido</p>
+      </ion-item>
+      <ion-item>
+        <p>Si no encuentra el tipo producto en la lista, puede crearlo dando clic en este botón</p>
+        <ion-icon name="add" item-right (click)="newTypeProduct()"></ion-icon>
+      </ion-item>
+        
+      <ion-item [ngClass]="{'error-border':!authForm.controls.measurementId.valid && authForm.controls.measurementId.touched}">
+        <ion-label> Medida </ion-label>
+        <ion-select formControlName="measurementId" [(ngModel)]="measurementId" name="measurementId">
+          <ion-option *ngFor="let item of measurements" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.measurementId.hasError('required') && authForm.controls.measurementId.touched">
+        <p>La medida es requerida</p>
+      </ion-item>
+      <ion-item>
+          <p>Si no encuentra la medida deseada en la lista, puede crearla dando clic en este botón</p>
+          <ion-icon name="add" item-right (click)="newMeasurement()"></ion-icon>
+        </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.stateId.valid && authForm.controls.stateId.touched}">
+        <ion-label> Estado </ion-label>
+        <ion-select formControlName="stateId" [(ngModel)]="stateId" name="stateId">
+          <ion-option *ngFor="let item of states" [value]="item._id">{{item.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.stateId.hasError('required') && authForm.controls.stateId.touched">
+        <p>El estado es requerido</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.price.valid && authForm.controls.price.touched}">
+        <ion-label stacked> Precio: </ion-label>
+        <ion-input formControlName="price" type="text" [(ngModel)]="price" name="price"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.price.hasError('required') && authForm.controls.price.touched">
+        <p>El precio es requerido</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.publicationDate.valid && authForm.controls.publicationDate.touched}">
+        <ion-label stacked> Fecha de Publicación: </ion-label>
+        <ion-input formControlName="publicationDate" type="text" [(ngModel)]="publicationDate" name="publicationDate"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.publicationDate.hasError('required') && authForm.controls.publicationDate.touched">
+        <p>La fecha de publicación es requerida</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.expirationDate.valid && authForm.controls.expirationDate.touched}">
+        <ion-label stacked> Fecha de Expiración: </ion-label>
+        <ion-input formControlName="expirationDate" type="text" [(ngModel)]="expirationDate" name="expirationDate"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.expirationDate.hasError('required') && authForm.controls.expirationDate.touched">
+        <p>La fecha de expiración es requerida</p>
+      </ion-item>
+
+      <ion-item [ngClass]="{'error-border':!authForm.controls.description.valid && authForm.controls.description.touched}">
+        <ion-label stacked> Descripción </ion-label>
+        <ion-input formControlName="description" type="text" [(ngModel)]="description" name="description"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.description.hasError('required') && authForm.controls.description.touched">
+        <p>La descripción es requerida</p>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!authForm.valid"> Guardar </button>
+    </div>
+  </form>
+</ion-content>

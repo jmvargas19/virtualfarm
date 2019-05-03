@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Finca Virtual
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="authForm" (ngSubmit)="login(authForm.value)">
+    <ion-item [ngClass]="{'error-border':!authForm.controls.userName.valid && authForm.controls.userName.touched}">
+      <ion-label fixed> Usuario </ion-label>
+      <ion-input formControlName="userName" type="text" [(ngModel)]="userName"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.userName.hasError('required') && authForm.controls.userName.touched">
+        <p>El nombre de usuario es requerido</p>
+    </ion-item>      
+    <ion-item *ngIf="authForm.controls.userName.hasError('minlength') && authForm.controls.userName.touched">
+        <p>Minimo 8 caracteres</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.userName.hasError('maxlength') && authForm.controls.userName.touched">
+        <p>Maximo 30 caracteres</p>
+    </ion-item>
+
+    <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+      <ion-label fixed> Contraseña </ion-label>
+      <ion-input formControlName="password" type="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+        <p>La contraseña es requerida</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+        <p>Minimo 6 caracteres</p>
+    </ion-item>
+    <button ion-button block color="primary" [disabled]="!authForm.valid"> Iniciar Sesión </button>
+  </form>
+</ion-content>

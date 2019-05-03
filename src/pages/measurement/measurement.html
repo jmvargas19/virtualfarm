@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>measurement</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="authForm" (ngSubmit)="saveMeasurements(authForm.value)">
+        <ion-list>
+          <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+            <ion-label stacked> Name: </ion-label>
+            <ion-input formControlName="name" type="text" placeholder="name" [(ngModel)]="name" name="name"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="authForm.controls.name.hasError('required') && authForm.controls.name.touched">
+            <p>El nombre es requerido</p>
+          </ion-item>
+          <ion-item *ngIf="authForm.controls.name.hasError('pattern') && authForm.controls.name.touched">
+            <p>No se permiten caracteres especiales</p>
+          </ion-item>
+        </ion-list>
+        <div padding>
+          <button ion-button block type="submit" [disabled]="!authForm.valid"> Guardar </button>
+        </div>
+      </form>
+</ion-content>

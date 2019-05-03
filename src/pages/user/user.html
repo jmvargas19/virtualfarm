@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Mi Perfil
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="getUser()">
+    <ion-list>
+      <ion-item>
+        <ion-label> Nombre de Usuario: </ion-label>
+        <ion-input [(ngModel)]="userName" name="userName" *ngFor="let item of users" [value]="item._id">{{item.userName}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Primer Nombre: </ion-label>
+        <ion-input [(ngModel)]="name1" name="name1" *ngFor="let item of users" [value]="item._id">{{item.name1}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Segundo Nombre: </ion-label>
+        <ion-input [(ngModel)]="name2" name="name2" *ngFor="let item of users" [value]="item._id">{{item.name2}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Primer Apellido: </ion-label>
+        <ion-input [(ngModel)]="surname1" name="surname1" *ngFor="let item of users" [value]="item._id">{{item.surname1}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Segundo Apellido: </ion-label>
+        <ion-input [(ngModel)]="surname2" name="surname2" *ngFor="let item of users" [value]="item._id">{{item.surname2}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Celular: </ion-label>
+        <ion-input [(ngModel)]="cellphone" name="cellphone" *ngFor="let item of users" [value]="item._id">{{item.cellphone}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Dirección: </ion-label>
+        <ion-input [(ngModel)]="address" name="address" *ngFor="let item of users" [value]="item._id">{{item.address}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Departamento: </ion-label>
+        <ion-input [(ngModel)]="departmentId" name="departmentId" *ngFor="let item of users" [value]="item._id">{{item.name}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Municipio: </ion-label>
+        <ion-input [(ngModel)]="townId" name="townId" *ngFor="let item of users" [value]="item._id">{{item.name}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Correo Electrónico: </ion-label>
+        <ion-input [(ngModel)]="email" name="email" *ngFor="let item of users" [value]="item._id">{{item.email}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label> Contraseña: </ion-label>
+        <ion-input [(ngModel)]="password" name="password" *ngFor="let item of users" [value]="item._id">{{item.password}}</ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
